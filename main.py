@@ -4,7 +4,7 @@ import compact
 import schedule
 import time
 
-get_schedule = ['9:05','12:05','15:05','18:05','21:05']
+get_schedule = ['09:05','12:05','15:05','18:05','21:05']
 event_num = 123
 event_title = "BOFXV"
 def getTask():
@@ -21,7 +21,7 @@ def getTask():
 def main():
     for sche in get_schedule:
         schedule.every().day.at(sche).do(getTask)
-    
+
     while True:
         schedule.run_pending()
         time.sleep(60)
