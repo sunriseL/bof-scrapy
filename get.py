@@ -20,9 +20,12 @@ class Get:
         html = etree.HTML(response.text,etree.HTMLParser())
         headers = html.xpath('//table/thead/*/th/text()')
         dataxmls = html.xpath('//table/tbody/tr')
-        #print(headers)
+        #print(dataxmls)
         datas = []
         for data in dataxmls:
-            datas.append(data.xpath('td//text()').append(date))
+            temp = data.xpath('td//text()')
+            temp.append(date)
+            datas.append(temp)
+        #print(datas)
         deploy.deploy(headers,datas,os.path.join(dir,self.event_title + "-" + file + ".csv"))
 #Get().getList()
