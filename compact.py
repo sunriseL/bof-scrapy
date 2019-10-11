@@ -14,6 +14,7 @@ def turn_data_into_target(data,date):
     return result
 
 def compact(Event="BOFXV"):
+    print("Compacting {0}...".format(Event))
     names = []
     datas = []
     for dirpath,dirnames,filenames in os.walk('data'):
@@ -21,6 +22,7 @@ def compact(Event="BOFXV"):
 		    for fn in filenames:
 			    if fn.startswith(Event):
 				    names.append(fn)
+    names.sort()
     for name in names:
         times = name[:name.index(".")].split("-")[-3:]
         date = "{0}/{1} {2}:00".format(times[0],times[1],times[2])
@@ -31,4 +33,5 @@ def compact(Event="BOFXV"):
                 if index > 0:
                     datas.append(turn_data_into_target(row,date))
     deploy.deploy(target_type,datas)
+    print("Compact Over")
 #compact()
