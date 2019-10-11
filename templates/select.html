@@ -1,0 +1,7 @@
+{% block body %}
+<p>
+    {% for name in names %}
+    {{name}}:<input type="checkbox" name="colors" value="blue" checked="yes" /><br />
+    {% endfor %}
+</p>
+{% endblock %}
