@@ -34,4 +34,19 @@ def compact(Event="BOFXV"):
                     datas.append(turn_data_into_target(row,date))
     deploy.deploy(target_type,datas)
     print("Compact Over")
+
+def compact_with_list(names):
+    names.sort()
+    datas = []
+    dirpath="data"
+    for name in names:
+        times = name[:name.index(".")].split("-")[-3:]
+        date = "{0}/{1} {2}:00".format(times[0],times[1],times[2])
+        print(date)
+        with open(os.path.join(dirpath,name),encoding="utf-8") as f:
+            r = csv.reader(f)
+            for index,row in enumerate(r):
+                if index > 0:
+                    datas.append(turn_data_into_target(row,date))
+    deploy.deploy(target_type,datas)
 #compact()
