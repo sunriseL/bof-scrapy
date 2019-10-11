@@ -1,7 +1,27 @@
 {% block body %}
 <p>
     {% for name in names %}
-    {{name}}:<input type="checkbox" name="colors" value="blue" checked="yes" /><br />
+    <input type="checkbox" id="file" name="colors" value={{name}} checked="yes" >{{name}}</input><br />
     {% endfor %}
 </p>
+<button id="compact">compact</button>
 {% endblock %}
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script>
+click = function(){
+data = new Array(0);
+$('input:checked').each(function(){
+	data.push($(this).val());	
+	//console.log($(this).val())
+});
+console.log(data)
+}
+
+$('input').click(click)
+$("#compact").click(function(){
+	$.post('/compact/list',{'value':data});
+})
+click()
+//console.log(data)
+
+</script>
