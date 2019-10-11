@@ -5,6 +5,10 @@
     {% endfor %}
 </p>
 <button id="compact">compact</button>
+<button id="3time">每天三次</button>
+<button id="6time">每天六次</button>
+<button id="all">全选</button>
+<button id="none">全不选</button>
 {% endblock %}
 <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
 <script>
@@ -14,12 +18,40 @@ $('input:checked').each(function(){
 	data.push($(this).val());	
 	//console.log($(this).val())
 });
-console.log(data)
+//console.log(data)
 }
 
 $('input').click(click)
 $("#compact").click(function(){
 	$.post('/compact/list',{'value':data});
+})
+$("#all").click(function(){
+	$('input').each(function(){
+		$(this).prop("checked",true);	
+	})
+})
+$("#none").click(function(){
+	$('input').each(function(){
+		$(this).prop("checked",false);	
+	})
+})
+$("#3time").click(function(){
+	$('input').each(function(){
+		date = $(this).val()
+		//console.log(date)
+		hour = date.split('.')[0].split('-').pop()
+		if(hour == "08" || hour == "14" || hour == "20") $(this).prop("checked", true)
+		else $(this).prop("checked",false)	
+	})
+})
+$("#6time").click(function(){
+	$('input').each(function(){
+		date = $(this).val()
+		//console.log(date)
+		hour = date.split('.')[0].split('-').pop()
+		if(hour == "06" || hour == "10" || hour == "14" || hour == "18" ||hour == "22" || hour == "02") $(this).prop("checked", true)
+		else $(this).prop("checked",false)	
+	})
 })
 click()
 //console.log(data)
