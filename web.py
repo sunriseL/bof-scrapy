@@ -35,10 +35,11 @@ def compact_with_list():
 
 @app.route('/compact/all', methods=['GET','POST'])
 def compact_all():
-	
-	
-	
 	return 'Compact Success'
+
+@app.route("/bargraph")
+def bargraph():
+	return render_template('bargraph.html')
 
 @app.route("/select/<name>")
 def select(name):
@@ -46,10 +47,20 @@ def select(name):
 
 @app.route("/files/<name>")
 def files(name):
-				
 	return jsonify(file_list(name))
 	
-	    
+def latest_file(name):
+	return file_list(name)["value"][-1]
+
+
+@app.route("/select/item/<name>")
+def latest_player_list(name):
+	with open("data/" + latest_file(name)) as f:
+		reader = csv.reader(f)
+		rows = [row for row in reader][1:]
+
+	return render_template("select_item.html",names = rows)
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0",port=8089)
