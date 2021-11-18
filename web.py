@@ -2,12 +2,12 @@ from flask import Flask,jsonify,render_template,request
 import compact
 import os
 
-data_folder = "/home/sunrise/bofxv/bof-scrapy/data"
-static_folder = "/home/sunrise/static"
+data_folder = "data"
+static_folder = "static"
 output_file = "data.csv"
 
 
-app = Flask(__name__,static_url_path="/static",static_folder="/home/sunrise/static")
+app = Flask(__name__,static_url_path="",static_folder=static_folder)
 def file_list(name):
 	t = {"value":[]}
 	for dirpath,dirnames,filenames in os.walk(data_folder):

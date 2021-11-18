@@ -1,6 +1,6 @@
 #coding:utf-8#
 import csv
-path = "/home/sunrise/static/data.csv"
+path = "static/data.csv"
 #path="data.csv"
 
 data_header = ['No.', 'Team', 'Artist', 'Genre', 'Title', 'Impr', 'Total', 'Median', 'Regist', 'Update']
